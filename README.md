@@ -1,6 +1,12 @@
-# Cuisine (version web)
+# Cuisine (ancienne version web)
 
-Site statique de l'appli Cuisine, publié par GitHub Pages. Il ne contient aucune donnée : les recettes, le planning et les
-courses sont lus dans un dépôt privé avec le jeton GitHub saisi dans les réglages (⚙), gardé dans le navigateur.
+Ce dépôt n'est plus utilisé : la version web de Cuisine est hébergée par Cloudflare depuis le dossier `docs/` du dépôt
+Cuisine, sur https://cuisine.pbailly.fr/.
 
-Ce dépôt est généré : ne pas modifier ici, voir `scripts/publier-web.sh` dans le dépôt Cuisine.
+L'ancienne copie du site a été retirée le 2026-11-08 : elle datait du 2026-11-02 et ne connaissait pas une partie des
+données (placard, rayons, achats et origines des courses, photos des recettes) ; une modification faite depuis elle les
+aurait effacées. Il ne reste qu'une page qui renvoie vers le vrai site et un service worker qui efface l'ancien cache.
+
+Le fichier `CNAME` est gardé exprès : tant que GitHub Pages est actif, il évite qu'un autre dépôt puisse revendiquer
+`cuisine.pbailly.fr` si le DNS pointait encore vers GitHub. Une fois le DNS vérifié (il doit pointer vers Cloudflare),
+désactiver Pages (Settings › Pages) et archiver le dépôt.
