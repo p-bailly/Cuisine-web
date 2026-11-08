@@ -2,19 +2,25 @@
 <html lang="fr">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
 <title>Cuisine</title>
-<meta name="theme-color" content="#FBF8F3" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#1A1816" media="(prefers-color-scheme: dark)">
-<link rel="manifest" href="manifest.webmanifest">
-<link rel="icon" href="icon.svg" type="image/svg+xml">
-<link rel="apple-touch-icon" href="icon.svg">
-<link rel="stylesheet" href="app.css">
+<script>
+  // Ancienne copie du site, retirée : le vrai site est https://cuisine.pbailly.fr/ (Cloudflare, dépôt Cuisine).
+  // On efface d'abord l'ancien service worker et ses caches, qui pourraient resservir l'ancienne appli.
+  (async () => {
+    try {
+      const regs = navigator.serviceWorker ? await navigator.serviceWorker.getRegistrations() : [];
+      await Promise.all(regs.map((r) => r.unregister()));
+      if (self.caches) await Promise.all((await caches.keys()).map((k) => caches.delete(k)));
+    } catch (e) { /* rien à nettoyer */ }
+    // Servie sous cuisine.pbailly.fr, cette page veut dire que le domaine pointe encore vers GitHub Pages : on va à
+    // l'adresse de Cloudflare (pas de boucle), où le jeton est à ressaisir une fois (⚙).
+    location.replace(location.hostname === 'cuisine.pbailly.fr' ? 'https://cuisine.plbailly25.workers.dev/' : 'https://cuisine.pbailly.fr/');
+  })();
+</script>
 </head>
-<body>
-<div id="app"></div>
-<div id="calques"></div>
-<div id="toasts" aria-live="polite"></div>
-<script type="module" src="js/app.js"></script>
+<body style="font-family: system-ui, sans-serif; padding: 24px">
+<p><a href="https://cuisine.pbailly.fr/">cuisine.pbailly.fr</a> · <a href="https://cuisine.plbailly25.workers.dev/">cuisine.plbailly25.workers.dev</a></p>
 </body>
 </html>
