@@ -14,15 +14,13 @@
       await Promise.all(regs.map((r) => r.unregister()));
       if (self.caches) await Promise.all((await caches.keys()).map((k) => caches.delete(k)));
     } catch (e) { /* rien à nettoyer */ }
-    // Servie sous cuisine.pbailly.fr, cette page voudrait dire que le domaine pointe encore vers GitHub Pages :
-    // on ne redirige pas (boucle), on l'explique.
-    if (location.hostname !== 'cuisine.pbailly.fr') location.replace('https://cuisine.pbailly.fr/');
-    else document.getElementById('msg').hidden = false;
+    // Servie sous cuisine.pbailly.fr, cette page veut dire que le domaine pointe encore vers GitHub Pages : on va à
+    // l'adresse de Cloudflare (pas de boucle), où le jeton est à ressaisir une fois (⚙).
+    location.replace(location.hostname === 'cuisine.pbailly.fr' ? 'https://cuisine.plbailly25.workers.dev/' : 'https://cuisine.pbailly.fr/');
   })();
 </script>
 </head>
 <body style="font-family: system-ui, sans-serif; padding: 24px">
-<p><a href="https://cuisine.pbailly.fr/">cuisine.pbailly.fr</a></p>
-<p id="msg" hidden>Cette page est l'ancienne copie du site, servie par GitHub Pages : le domaine doit pointer vers Cloudflare.</p>
+<p><a href="https://cuisine.pbailly.fr/">cuisine.pbailly.fr</a> · <a href="https://cuisine.plbailly25.workers.dev/">cuisine.plbailly25.workers.dev</a></p>
 </body>
 </html>
